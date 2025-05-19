@@ -1,0 +1,75 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+.env/
+.envrc
+
+# Editor & system files
+*.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Python cache
+*.log
+*.pot
+*.pyc
+
+# Jupyter notebooks checkpoints
+.ipynb_checkpoints/
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Local database or app state
+instance/
+*.sqlite3
+*.db
+
+# Langchain caches (if used)
+.cache/
+.lc/
+
+# dotenv environment files
+.env
+.env.*
+
+# Docker
+*.pid
+*.seed
+*.pid.lock
+
+# pyright / mypy cache
+.mypy_cache/
+.pyright/
+
+# pytest cache
+.pytest_cache/
+
+# Coverage reports
+htmlcov/
+.coverage
+coverage.xml
+
+# Build / dist
+build/
+dist/
+*.egg-info/
+
+# Notebook output
+*.out
+*.ipynb~
+
+# Model files (if any)
+*.ckpt
+*.pt
+*.bin
+
+# Gemini or Google credentials (precaution)
+google_api_key.json
