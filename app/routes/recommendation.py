@@ -52,7 +52,7 @@ def recommend():
         if isinstance(recommendations, dict) and "error" in recommendations:
             return jsonify(recommendations), 404
 
-        return jsonify({"recommendations": recommendations}), 200
+        return jsonify({"data": recommendations}), 200
 
     except Exception as e:
         return jsonify({"error": f"Error generating recommendations: {str(e)}"}), 500

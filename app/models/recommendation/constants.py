@@ -9,17 +9,17 @@ ITEMS_PATH = os.path.join(MODEL_DIR, "items.pkl")
 
 # Price range categories
 PRICE_RANGES = {
-    "very_low": 100,
-    "low": 500,
-    "medium": 1000,
-    "high": 5000,
+    "very_low": 50000,
+    "low": 100000,
+    "medium": 200000,
+    "high": 500000,
     "very_high": float('inf')
 }
 
 # TF-IDF parameters
 TFIDF_PARAMS = {
     "analyzer": "word",
-    "stop_words": "english",
+    "stop_words": None,  # Removed English stopwords for Vietnamese text
     "min_df": 0.01,
     "max_df": 0.95,
     "ngram_range": (1, 2)  # Include bigrams for better feature extraction

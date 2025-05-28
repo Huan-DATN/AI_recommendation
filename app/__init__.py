@@ -1,5 +1,6 @@
 from flask import Flask
 from app.routes.recommendation import recommendation_bp
+from app.routes.csv_recommendation import csv_recommendation_bp
 from app.tasks.scheduled_tasks import start_scheduler
 
 
@@ -8,6 +9,7 @@ def create_app():
     app.config.from_object("app.config.Config")
 
     app.register_blueprint(recommendation_bp, url_prefix="/api")
+    app.register_blueprint(csv_recommendation_bp, url_prefix="/api/csv")
 
     # Start the scheduler for periodic tasks
     with app.app_context():

@@ -302,3 +302,110 @@ app/
 - **Models**: Core recommendation algorithms and data structures
 - **Services**: Business logic that coordinates between models and routes
 - **Routes**: API endpoints that handle HTTP requests and responses
+
+## CSV-based Recommendation API
+
+The service also provides recommendations based on a CSV dataset of products.
+
+### Train the CSV Recommendation Model
+
+```
+POST /api/csv/train
+```
+
+This endpoint loads product data from the CSV file and trains the recommendation model.
+
+Response:
+
+```json
+{
+	"message": "CSV-based recommendation model trained successfully"
+}
+```
+
+### Get All Products from CSV
+
+```
+GET /api/csv/products
+```
+
+This endpoint returns all products from the CSV dataset.
+
+Response:
+
+```json
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "Mực viên Hàn Quốc",
+      "star": 3,
+      "cityName": "Bình Dương",
+      "groupName": "Chả mực",
+      "description": "Mực viên Hàn Quốc kết hợp các thành phần thịt cá và mực chế biến cùng gia vị phối trộn lại với nhau, tạo nên những viên mực tròn có độ mềm dai sần sật, không mang cảm giác gây ngán của bột...",
+      ...
+    },
+    ...
+  ]
+}
+```
+
+### Get Product Recommendations from CSV
+
+```
+GET /api/csv/recommend?product_id=1&num=5
+```
+
+Parameters:
+
+- `product_id`: ID of the product to get recommendations for
+- `num`: Number of recommendations to return (default: 5)
+
+Response:
+
+```json
+{
+  "data": [
+    {
+      "id": 2,
+      "name": "Similar Product",
+      "description": "Product description",
+      "star": 3,
+      "cityName": "Bình Dương",
+      "groupName": "Chả mực",
+      "similarity_score": 0.87
+    },
+    ...
+  ]
+}
+```
+
+### Get Keyword-based Recommendations from CSV
+
+```
+GET /api/csv/recommend/keywords?keywords=mực%20viên&num=5
+```
+
+Parameters:
+
+- `keywords`: Keywords to find similar products
+- `num`: Number of recommendations to return (default: 5)
+
+Response:
+
+```json
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "Mực viên Hàn Quốc",
+      "description": "Product description",
+      "star": 3,
+      "cityName": "Bình Dương",
+      "groupName": "Chả mực",
+      "similarity_score": 0.92
+    },
+    ...
+  ]
+}
+```

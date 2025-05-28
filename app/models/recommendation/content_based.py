@@ -7,6 +7,7 @@ from app.models.recommendation.constants import (
     TFIDF_MODEL_PATH, MATRIX_PATH, ITEMS_PATH,
     PRICE_RANGES, TFIDF_PARAMS, CONTENT_FEATURES
 )
+from app.models.text_preprocessing import preprocess_text
 
 # Global variables to store models
 tfidf_vectorizer = None
@@ -42,13 +43,13 @@ def prepare_content_features(products_df):
     """Prepare content features from product data"""
     products_df['content'] = products_df.apply(
         lambda x: ' '.join(filter(None, [
-            str(x.get('name', '')),
-            str(x.get('description', '')),
+            preprocess_text(str(x.get('name', ''))),
+            preprocess_text(str(x.get('description', ''))),
             f"price_{get_price_range(x.get('price', 0))}",
-            f"group_{str(x.get('groupName', ''))}",
-            f"city_{str(x.get('cityName', ''))}",
+            f"group_{preprocess_text(str(x.get('groupName', '')))}",
+            f"city_{preprocess_text(str(x.get('cityName', '')))}",
             f"star_{str(x.get('star', 2))}",
-            ' '.join([f"category_{cat}" for cat in x.get('categories', []) if cat]) if x.get('categories') else '',
+            ' '.join([f"category_{preprocess_text(cat)}" for cat in x.get('categories', []) if cat]) if x.get('categories') else '',
         ])),
         axis=1
     )
