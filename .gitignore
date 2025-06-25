@@ -73,3 +73,6 @@ dist/
 
 # Gemini or Google credentials (precaution)
 google_api_key.json
+
+# Results
+results/

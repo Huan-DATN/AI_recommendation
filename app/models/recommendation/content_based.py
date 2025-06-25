@@ -102,27 +102,22 @@ class ContentBasedRecommender:
             if not load_models():
                 return {"error": "Recommendation model not trained yet"}
 
-        # Find the index of the product in the dataframe
         try:
             product_id = int(product_id)  # Ensure product_id is an integer
             idx = items_df[items_df['id'] == product_id].index[0]
         except (IndexError, KeyError, ValueError):
             return {"error": f"Product with ID {product_id} not found"}
 
-        # Calculate cosine similarity between the product and all other products
         sim_scores = cosine_similarity(tfidf_matrix[idx], tfidf_matrix).flatten()
 
-        # Get indices of top similar products (excluding the product itself)
         sim_indices = sim_scores.argsort()[::-1]
         sim_indices = sim_indices[sim_indices != idx][:num_recommendations]
 
-        # Get the products with similarity scores
         recommended_products = []
         for i, idx in enumerate(sim_indices):
             product = items_df.iloc[idx].to_dict()
             product['similarity_score'] = float(sim_scores[idx])
 
-            # Remove content field as it's not needed in the response
             if 'content' in product:
                 del product['content']
 

@@ -1,7 +1,7 @@
 import os
 
 # Path to save/load model files
-MODEL_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "models")
+MODEL_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "results")
 os.makedirs(MODEL_DIR, exist_ok=True)
 TFIDF_MODEL_PATH = os.path.join(MODEL_DIR, "tfidf_vectorizer.pkl")
 MATRIX_PATH = os.path.join(MODEL_DIR, "tfidf_matrix.pkl")
@@ -19,10 +19,11 @@ PRICE_RANGES = {
 # TF-IDF parameters
 TFIDF_PARAMS = {
     "analyzer": "word",
-    "stop_words": None,  # Removed English stopwords for Vietnamese text
+    "stop_words": None,
     "min_df": 0.01,
     "max_df": 0.95,
-    "ngram_range": (1, 2)  # Include bigrams for better feature extraction
+    "ngram_range": (1, 2),
+    "max_features": 10000
 }
 
 # Content features to extract from products
